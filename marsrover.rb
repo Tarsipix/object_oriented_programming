@@ -29,7 +29,7 @@ class Rover
     elsif @direction == "S"
       @y -= 1
     elsif @direction == "W"
-      @y -= 1
+      @x -= 1
     else
       puts "You F*D up!"
     end
@@ -40,9 +40,9 @@ class Rover
   end
 
   def turn_left
-    puts "XXXXXXX #{@direction}"
+    # puts "XXXXXXX #{@direction}"
     @direction = DIRECTIONS[(DIRECTIONS.index(@direction) - 1) % 4]
-puts "yyyyyyYYY #{@direction}"
+# puts "yyyyyyYYY #{@direction}"
   end
 
   def to_s
