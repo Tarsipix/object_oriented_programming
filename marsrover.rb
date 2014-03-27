@@ -1,5 +1,8 @@
 class Position
-  attr_reader :x, :y, :d
+  attr_accessor :x, :y, :d
+  def display_coordinates
+    puts "#{x}, #{y}, #{d}"
+  end
 end
 
 class Rover
@@ -8,9 +11,10 @@ class Rover
 end
 
 class Plateau
-  attr_accessor :x2, :y2
-  @x1 = 0
-  @y1 = 0
+  attr_accessor :x1, :y1, :x2, :y2
+  def display_coordinates
+    puts "(#{x1}, #{y1}),(#{x2}, #{y2})"
+  end
 end
 
 # Main code
@@ -30,15 +34,30 @@ input_array = user_input.split("\n")
 
 puts "\nINPUT broken down"
 counter = 0
+plateau_instance = Plateau.new
+plateau_instance.x1 = 0
+plateau_instance.y1 = 0
+rover_instance = Rover.new
+
 input_array.each { 
-  |x| 
-  y = x.split(" ")
+  |row| 
+  y = row.split(" ")
   if counter == 0
     puts "Plateau x2 y2 = #{y}"
+    plateau_instance.x2 = y[0]
+    plateau_instance.y2 = y[1]
+    plateau_instance.display_coordinates
   elsif counter % 2 == 1
-    puts "Rover #{counter}"
+    puts "Rover coordinates = #{y}"
+    rover_position = Position.new
+    rover_position.x = y[0].to_i
+    rover_position.y = y[1].to_i
+    rover_position.d = y[2]
+    rover_position.display_coordinates
   else
-    puts "Rover #{counter} movement"
+    puts "Rover movement = #{y}"
+    
+
   end
   counter+=1
 }
